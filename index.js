@@ -17,7 +17,8 @@ const config = {
   prefix: '',
   exclude: /.*/,
   enableLog: '',
-  ignoreError: false
+  ignoreError: false,
+  removeMode: true
 }
 let store = null
 
@@ -35,6 +36,7 @@ module.exports = class WebpackAliOSSPlugin {
     config.exclude = cfg.exclude && cfg.exclude !== '' ? cfg.exclude : config.exclude
     config.ignoreError = cfg.ignoreError ? cfg.ignoreError : false
     config.enableLog = cfg.enableLog === false ? cfg.enableLog : true
+    config.removeMode = cfg.deleteMode === false ? false : true
   }
 
   apply (compiler) {
@@ -70,7 +72,7 @@ const uploadFiles = (compilation) => {
         if (files.length === uploadIndex) {
           logInfo(green('OSS 上传完成\n'))
         }
-        delete compilation.assets[file.name]
+        !config.removeMode || delete compilation.assets[file.name]
         // Promise.resolve('上传成功')
       }, (e) => {
         return Promise.reject(e)
