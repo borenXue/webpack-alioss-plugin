@@ -2,18 +2,48 @@
   "name": "webpack-alioss-plugin",
   "version": "1.0.1",
   "description": "阿里 oss-webpack 自动上传插件",
-  "main": "index.js",
+  "main": "dist/AliOssPlugin.js",
   "repository": "https://github.com/borenXue/webpack-alioss-plugin.git",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/borenXue/webpack-alioss-plugin/issues/new"
   },
+  "scripts": {
+    "dev": "export NODE_ENV=development && webpack-dev-server --inline --hot --colors --progress --config build/webpack.conf.js",
+    "build": "export NODE_ENV=production && webpack --config build/webpack.conf.js",
+    "eslint": "eslint --format 'node_modules/eslint-friendly-formatter' src/index.js",
+    "eslint:html": "eslint --format html ./src/* -o ./dist/eslint/index.html"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "homepage": "http://www.xueboren.com",
   "author": "borenXue <boren.xue@outlook.com> (http://www.xueboren.com)",
   "dependencies": {
+    "address": "^1.0.1",
     "ali-oss": "^4.8.0",
     "chalk": "^1.1.3",
     "co": "^4.6.0",
     "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-friendly-formatter": "^2.0.7",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "uglify-js": "^2.8.22",
+    "uglifyjs-webpack-plugin": "^0.4.3",
+    "webpack": "^2.4.1"
   }
 }

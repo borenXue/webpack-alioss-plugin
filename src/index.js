@@ -1,7 +1,5 @@
 const co = require('co')
 const oss = require('ali-oss')
-const fs = require('fs')
-const path = require('path')
 const chalk = require('chalk')
 const _ = require('lodash')
 const red = chalk.red
@@ -36,7 +34,7 @@ module.exports = class WebpackAliOSSPlugin {
     config.exclude = cfg.exclude && cfg.exclude !== '' ? cfg.exclude : config.exclude
     config.ignoreError = cfg.ignoreError ? cfg.ignoreError : false
     config.enableLog = cfg.enableLog === false ? cfg.enableLog : true
-    config.removeMode = cfg.deleteMode === false ? false : true
+    config.removeMode = cfg.deleteMode === false ? cfg.deleteMode : true
   }
 
   apply (compiler) {
