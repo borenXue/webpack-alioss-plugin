@@ -1,0 +1,22 @@
+node {
+   echo '开始构建......'
+   stage('Git') {
+       checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/borenXue/webpack-alioss-plugin.git']]])
+       sh 'nrm use taobao; nrm current;'
+       sh 'node -v'
+   }
+   stage('Test') {
+       echo '开始运行测试用例 ....'
+       sh 'yarn eslint'
+       echo '运行测试用例结束'
+   }
+   stage('Build') {
+       echo '开始执行构建 ....'
+       sh 'yarn build'
+       echo '执行构建结束'
+   }
+   stage('NPM') {
+       sh 'nrm use npm; nrm current; npm --version; node --version; node -v'
+       echo '开始发布产品 ...... '
+   }
+}
