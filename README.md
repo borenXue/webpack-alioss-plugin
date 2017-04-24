@@ -24,6 +24,7 @@ yarn add webpack-alioss-plugin --dev
 
 ```
 const AliOssPlugin = require('webpack-alioss-plugin')
+
 webpackConfig.plugins.push(new AliOSSPlugin({
   accessKeyId: 'your-key-id',
   accessKeySecret: 'your-key-secret',
