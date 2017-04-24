@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "export NODE_ENV=development && webpack-dev-server --inline --hot --colors --progress --config build/webpack.conf.js",
     "build": "export NODE_ENV=production && webpack --config build/webpack.conf.js",
-    "eslint": "eslint --format 'node_modules/eslint-friendly-formatter' src/index.js",
+    "eslint": "eslint --format node_modules/eslint-friendly-formatter src/index.js",
     "eslint:html": "eslint --format html ./src/* -o ./dist/eslint/index.html",
     "appveyor:test": "yarn eslint",
     "travis:test": "yarn eslint"
