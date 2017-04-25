@@ -1,0 +1,41 @@
+sudo: false
+language: node_js
+
+branches:
+  only:
+    - master
+
+cache:
+  directories:
+    - $HOME/.npm
+    - $HOME/.yarn-cache
+
+matrix:
+  include:
+    - os: linux
+      node_js: "7"
+      env: NO_WATCH_TESTS=1 JOB_PART=test
+    - os: linux
+      node_js: "6"
+      env: NO_WATCH_TESTS=1 JOB_PART=test
+    - os: linux
+      node_js: "4.3"
+      env: NO_WATCH_TESTS=1 JOB_PART=test
+    - os: osx
+      node_js: "7"
+      env: NO_WATCH_TESTS=1 JOB_PART=test
+  allow_failures:
+    - os: osx
+  fast_finish: true
+
+script: npm run travis:$JOB_PART
+script: npm run build
+
+after_success:
+  - echo 'test and build success ~_~'
+
+notifications:
+  slack:
+    rooms:
+      - enjoy-coding-team:8PUCn7lnInAnVS4IbYekutNy#general
+      - enjoy-coding-team:8PUCn7lnInAnVS4IbYekutNy#random
