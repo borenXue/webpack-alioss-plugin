@@ -1,0 +1,43 @@
+# http://www.appveyor.com/docs/appveyor-yml
+
+branches:
+  only:
+    - master
+
+init:
+  - git config --global core.autocrlf input
+
+clone_depth: 50
+
+# what combinations to test
+environment:
+  matrix:
+    - nodejs_version: 7
+      job_part: test
+    - nodejs_version: 6
+      job_part: test
+
+install:
+  - ps: Install-Product node $env:nodejs_version x64
+  - npm install yarn -g
+  - yarn install
+
+build: off
+
+matrix:
+  fast_finish: true
+
+test_script:
+  - node --version
+  - npm --version
+  - yarn --version
+  - cmd: npm run appveyor:%job_part%
+  - cmd: npm run build
+
+notifications: 
+- provider: Slack
+  incoming_webhook: https://hooks.slack.com/services/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
+  channel: '#general'
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: true

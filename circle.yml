@@ -1,0 +1,23 @@
+general:
+  artifacts:
+    - "./coverage"
+
+machine:
+  node:
+    version: 4.7.0
+
+dependencies:
+  pre:
+    - npm install -g yarn
+  override:
+    - yarn install
+
+test:
+  pre:
+    - npm run travis:test
+  override:
+    - npm run travis:test:
+        parallel: false
+        files:
+          - src/index.js
+    - npm run build
