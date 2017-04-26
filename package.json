@@ -1,6 +1,6 @@
 {
     "name": "webpack-alioss-plugin",
-    "version": "1.2.3",
+    "version": "1.3.0",
     "description": "阿里 oss-webpack 自动上传插件 ",
     "main": "src/index.js",
     "repository": "https://github.com/borenXue/webpack-alioss-plugin.git",

@@ -28,9 +28,22 @@ webpackConfig.plugins.push(new AliOSSPlugin({
   accessKeySecret: 'your-key-secret',
   region: 'your-region', // eg: oss-cn-hangzhou
   bucket: '',
-  prefix: '', // eg: auto_upload_ci/test
+  prefix: '', // oss目录前缀; eg: auto_upload_ci/test
   exclude: /.*\.html$/,   // 选填, 默认: /.*/
   enableLog: true,        // 选填, 默认: true
-  ignoreError: false      // 选填, 默认: false
+  ignoreError: false,      // 选填, 默认: false
+  deleteMode: true        // 选填, 默认: true
 }))
 ```
+
+> 参数说明
+
+* prefix: oss 指定 bucket 下目录名, 文件会上传到该目录下面
+* exclude: 忽略文件, 支持正则表达式, 符合该表达式的文件不会被上传到 oss
+* enableLog: 是否输出详细日志, 用于调试
+* ignoreError: 上传失败是否终止构建
+  - true: 上传失败被忽略, 继续构建, 但文件不会上传oss, 同时文件也会本地生成; 效果等同于未使用该插件
+  - false: 上传失败则终止构建
+* deleteMode: 删除模式
+  - true: 上传的文件将不会本地生成
+  - false: 上传的文件也会在本地生成一份
