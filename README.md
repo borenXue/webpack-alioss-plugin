@@ -9,6 +9,7 @@
 [![dependencies Status](https://img.shields.io/npm/l/webpack-alioss-plugin.svg)](https://github.com/borenXue/webpack-alioss-plugin/blob/master/LICENCE)
 [![node version](https://img.shields.io/npm/dm/webpack-alioss-plugin.svg)](ttps://npmjs.com/package/webpack-alioss-plugin)
 [![Join the chat at https://gitter.im/webpack-alioss-plugin/Lobby](https://badges.gitter.im/webpack-alioss-plugin/Lobby.svg)](https://gitter.im/webpack-alioss-plugin/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![bitHound Dependencies](https://www.bithound.io/github/borenXue/webpack-alioss-plugin/badges/dependencies.svg)](https://www.bithound.io/github/borenXue/webpack-alioss-plugin/master/dependencies/npm)
 <!-- [![node version](https://badges.gitter.im/borenXue/webpack-alioss-plugin.svg)](https://gitter.im/borenXue/webpack-alioss-plugin) -->
 <!--[![node version](https://img.shields.io/coveralls/borenXue/webpack-alioss-plugin.svg)](https://coveralls.io/r/borenXue/webpack-alioss-plugin)-->
 
