@@ -13,13 +13,13 @@
 <!-- [![node version](https://badges.gitter.im/borenXue/webpack-alioss-plugin.svg)](https://gitter.im/borenXue/webpack-alioss-plugin) -->
 <!--[![node version](https://img.shields.io/coveralls/borenXue/webpack-alioss-plugin.svg)](https://coveralls.io/r/borenXue/webpack-alioss-plugin)-->
 
-> 安装
+> Install
 
 ```
 yarn add webpack-alioss-plugin --dev
 ```
 
-> 使用示例
+> Example
 
 ```
 const AliOssPlugin = require('webpack-alioss-plugin')
@@ -30,21 +30,27 @@ webpackConfig.plugins.push(new AliOSSPlugin({
   region: 'your-region', // eg: oss-cn-hangzhou
   bucket: '',
   prefix: '', // oss目录前缀; eg: auto_upload_ci/test
-  exclude: /.*\.html$/,   // 选填, 默认: /.*/
-  enableLog: true,        // 选填, 默认: true
-  ignoreError: false,      // 选填, 默认: false
-  deleteMode: true        // 选填, 默认: true
+  exclude: /.*\.html$/,   // Optional, default: /.*/
+  enableLog: true,        // Optional, default: true
+  ignoreError: false,      // Optional, default: false
+  deleteMode: true        // Optional, default: true
 }))
 ```
 
-> 参数说明
+> Options
 
-* prefix: oss 指定 bucket 下目录名, 文件会上传到该目录下面
-* exclude: 忽略文件, 支持正则表达式, 符合该表达式的文件不会被上传到 oss
-* enableLog: 是否输出详细日志, 用于调试
-* ignoreError: 上传失败是否终止构建
-  - true: 上传失败被忽略, 继续构建, 但文件不会上传oss, 同时文件也会本地生成; 效果等同于未使用该插件
-  - false: 上传失败则终止构建
-* deleteMode: 删除模式
-  - true: 上传的文件将不会本地生成
-  - false: 上传的文件也会在本地生成一份
+* prefix: The directory name which will accept uploaded files.
+* exclude: Support RegExp syntax, matched files will not be upload to oss
+* enableLog: Whether or not show detail infos for you, just should be enable in development mode.
+* ignoreError:  Whether or not stop build if upload error.
+  - true: will be stop
+  - false: will be not stop
+* deleteMode: Whether or not delete file after the file uploaded succesfully.
+  - true: delete
+  - false: not delete
+  
+> CHANGELOG
+
+* 1.4.0
+	- Modify README descs.
+
