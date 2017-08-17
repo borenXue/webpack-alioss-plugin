@@ -29,7 +29,7 @@ webpackConfig.plugins.push(new AliOSSPlugin({
   accessKeySecret: 'your-key-secret',
   region: 'your-region', // eg: oss-cn-hangzhou
   bucket: '',
-  prefix: '', // oss目录前缀; eg: auto_upload_ci/test
+  prefix: '', // oss directory prefix; eg: auto_upload_ci/test
   exclude: /.*\.html$/,   // Optional, default: /.*/
   enableLog: true,        // Optional, default: true
   ignoreError: false,      // Optional, default: false
