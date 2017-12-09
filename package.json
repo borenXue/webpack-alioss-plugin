@@ -13,8 +13,8 @@
         "build": "cross-env NODE_ENV=production && webpack --config build/webpack.conf.js",
         "eslint": "eslint --format node_modules/eslint-friendly-formatter src/index.js",
         "eslint:html": "eslint --format html ./src/* -o ./dist/eslint/index.html",
-        "appveyor:test": "yarn eslint",
-        "travis:test": "yarn eslint"
+        "appveyor:test": "npm run eslint",
+        "travis:test": "npm run eslint"
     },
     "engines": {
         "node": ">=4.0.0",

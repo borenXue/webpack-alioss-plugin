@@ -19,8 +19,6 @@ environment:
 
 install:
   - ps: Install-Product node $env:nodejs_version x64
-  - npm install yarn -g
-  - yarn install
 
 build: off
 
@@ -30,7 +28,6 @@ matrix:
 test_script:
   - node --version
   - npm --version
-  - yarn --version
   - cmd: npm run appveyor:%job_part%
   - cmd: npm run build
 
