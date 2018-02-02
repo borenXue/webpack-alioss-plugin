@@ -50,7 +50,8 @@ module.exports = class WebpackAliOSSPlugin {
           if (config.ignoreError) {
             cb()
           } else {
-            cb(err)
+            compilation.errors.push(err)
+            cb()
           }
         })
     })
