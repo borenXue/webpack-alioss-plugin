@@ -48,9 +48,22 @@ webpackConfig.plugins.push(new AliOSSPlugin({
 * deleteMode: Whether or not delete file after the file uploaded succesfully.
   - true: delete
   - false: not delete
+
+> security
+
+You could set secretive param value by environment variable. We support follow keys.
+
+* WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_ID: if options.accessKeyId is not given, this value will effect
+* WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_SECRET: if options.accessKeySecret is not given, this value will effect
+* WEBPACK_ALIOSS_PLUGIN_BUCKET: if options.bucket is not given, this value will effect
+* WEBPACK_ALIOSS_PLUGIN_REGION: if options.region is not given, this value will effect
   
 > CHANGELOG
 
+* 1.4.6
+  - fixed [issue 3](https://github.com/borenXue/webpack-alioss-plugin/issues/3): add environment variable setting support
+* 1.4.5
+  - exit process while upload failure
 * 1.4.0
 	- Modify README descs.
 

@@ -26,10 +26,10 @@ const logInfo = (str) => {
 
 module.exports = class WebpackAliOSSPlugin {
   constructor (cfg) {
-    config.auth.accessKeyId = cfg.accessKeyId
-    config.auth.accessKeySecret = cfg.accessKeySecret
-    config.auth.bucket = cfg.bucket
-    config.auth.region = cfg.region
+    config.auth.accessKeyId = cfg.accessKeyId || process.env.WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_ID
+    config.auth.accessKeySecret = cfg.accessKeySecret || process.env.WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_SECRET
+    config.auth.bucket = cfg.bucket || process.env.WEBPACK_ALIOSS_PLUGIN_BUCKET
+    config.auth.region = cfg.region || process.env.WEBPACK_ALIOSS_PLUGIN_REGION
     config.prefix = cfg.prefix.endsWith('/') ? cfg.prefix : `${cfg.prefix}/`
     config.exclude = cfg.exclude && cfg.exclude !== '' ? cfg.exclude : config.exclude
     config.ignoreError = cfg.ignoreError ? cfg.ignoreError : false
