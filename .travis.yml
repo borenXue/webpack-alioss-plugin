@@ -18,9 +18,6 @@ matrix:
     - os: linux
       node_js: "6"
       env: NO_WATCH_TESTS=1 JOB_PART=test
-    - os: linux
-      node_js: "4.3"
-      env: NO_WATCH_TESTS=1 JOB_PART=test
     - os: osx
       node_js: "7"
       env: NO_WATCH_TESTS=1 JOB_PART=test
