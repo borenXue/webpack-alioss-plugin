@@ -1,6 +1,6 @@
 {
     "name": "webpack-alioss-plugin",
-    "version": "1.4.6",
+    "version": "1.4.7",
     "description": "Ali oss-webpack auto upload files plugin ",
     "main": "src/index.js",
     "repository": "https://github.com/borenXue/webpack-alioss-plugin.git",
@@ -17,7 +17,7 @@
         "travis:test": "npm run eslint"
     },
     "engines": {
-        "node": ">=4.0.0",
+        "node": ">=6.0.0",
         "npm": ">= 3.0.0"
     },
     "homepage": "http://www.xueboren.com",
