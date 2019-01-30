@@ -1,0 +1,174 @@
+{
+  "stats": {
+    "suites": 4,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2019-01-30T12:37:32.133Z",
+    "end": "2019-01-30T12:37:32.149Z",
+    "duration": 16,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false,
+    "passPercentClass": "success",
+    "pendingPercentClass": "danger"
+  },
+  "suites": {
+    "uuid": "8d7e957c-3e7e-474a-9bad-e782cf2a3964",
+    "title": "",
+    "fullFile": "",
+    "file": "",
+    "beforeHooks": [],
+    "afterHooks": [],
+    "tests": [],
+    "suites": [
+      {
+        "uuid": "5f561caa-a3d0-4c5e-902a-48ed3c02fb58",
+        "title": "Array",
+        "fullFile": "/home/travis/build/borenXue/webpack-alioss-plugin/test/index.js",
+        "file": "/test/index.js",
+        "beforeHooks": [],
+        "afterHooks": [],
+        "tests": [],
+        "suites": [
+          {
+            "uuid": "d350436f-564e-4924-8b43-76da3d6ab9ce",
+            "title": "#calc-config",
+            "fullFile": "/home/travis/build/borenXue/webpack-alioss-plugin/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "用户参数、默认参数合并: 用户设置所有选项 - 不使用环境变量",
+                "fullTitle": "Array #calc-config 用户参数、默认参数合并: 用户设置所有选项 - 不使用环境变量",
+                "timedOut": false,
+                "duration": 3,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "var plugin = new WebpackAliOSSPlugin(config);\nassert(_.isEqual(plugin.config, config), message);",
+                "err": {},
+                "isRoot": false,
+                "uuid": "a7bf4875-fcdf-4006-8db7-5d09de9a8b94",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "a7bf4875-fcdf-4006-8db7-5d09de9a8b94"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 3,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "9b2db38a-889d-43ea-8631-eb0504bec11c",
+            "title": "#calc-config",
+            "fullFile": "/home/travis/build/borenXue/webpack-alioss-plugin/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "用户参数、环境变量、默认参数合并: auth.region 使用环境变量",
+                "fullTitle": "Array #calc-config 用户参数、环境变量、默认参数合并: auth.region 使用环境变量",
+                "timedOut": false,
+                "duration": 1,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "var cfg = _.cloneDeep(config);\ndelete cfg.auth.region;\nprocess.env.WEBPACK_ALIOSS_PLUGIN_REGION = '004';\nvar plugin = new WebpackAliOSSPlugin(cfg);\ncfg.auth.region = '004';\nassert(_.isEqual(plugin.config, cfg), message);",
+                "err": {},
+                "isRoot": false,
+                "uuid": "03824647-1074-4469-bc85-a11a87d52eb6",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "03824647-1074-4469-bc85-a11a87d52eb6"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 1,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "0d9fbc3d-6b5e-443c-bde0-74e52591c13e",
+            "title": "#calc-config",
+            "fullFile": "/home/travis/build/borenXue/webpack-alioss-plugin/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "环境变量、默认参数合并: auth.region 使用环境变量",
+                "fullTitle": "Array #calc-config 环境变量、默认参数合并: auth.region 使用环境变量",
+                "timedOut": false,
+                "duration": 0,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "process.env.WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_ID = '001';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_SECRET = '002';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_BUCKET = '003';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_REGION = '004';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_ENABLE_LOG = true;\nprocess.env.WEBPACK_ALIOSS_PLUGIN_IGNORE_ERROR = true;\nprocess.env.WEBPACK_ALIOSS_PLUGIN_REMOVE_MODE = false;\nprocess.env.WEBPACK_ALIOSS_PLUGIN_PREFIX = 'aa';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_EXCLUDE = /aa.*/;\nvar plugin = new WebpackAliOSSPlugin({\n  options: 'a',\n  exclude: /aa.*/\n});\nassert(_.isEqual(plugin.config, config), message);",
+                "err": {},
+                "isRoot": false,
+                "uuid": "a1d29c8f-e090-4dd5-881d-f9f61e46e88b",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "a1d29c8f-e090-4dd5-881d-f9f61e46e88b"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 0,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          }
+        ],
+        "passes": [],
+        "failures": [],
+        "pending": [],
+        "skipped": [],
+        "duration": 0,
+        "root": false,
+        "rootEmpty": false,
+        "_timeout": 2000
+      }
+    ],
+    "passes": [],
+    "failures": [],
+    "pending": [],
+    "skipped": [],
+    "duration": 0,
+    "root": true,
+    "rootEmpty": true,
+    "_timeout": 2000
+  },
+  "copyrightYear": 2019
+}
