@@ -22,12 +22,11 @@ jobs:
         provider: script
         skip_cleanup: true
         script:
-          - npm run build
-          - pwd && ls && git status && git diff
-          - npm run semantic-release
+          npm run build;
+          pwd && ls && git status && git diff;
+          npm run semantic-release
         after_success:
-          - - pwd && ls && git status && git diff
-          - echo 'test and build success ~_~'
+          pwd && ls && git status && git diff;
 
 notifications:
   email:
