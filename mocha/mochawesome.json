@@ -5,9 +5,9 @@
     "passes": 3,
     "pending": 0,
     "failures": 0,
-    "start": "2019-01-30T13:05:14.292Z",
-    "end": "2019-01-30T13:05:14.309Z",
-    "duration": 17,
+    "start": "2019-01-30T13:14:45.012Z",
+    "end": "2019-01-30T13:14:45.111Z",
+    "duration": 99,
     "testsRegistered": 3,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -19,7 +19,7 @@
     "pendingPercentClass": "danger"
   },
   "suites": {
-    "uuid": "b33876e5-990b-48dc-86b6-abf9a0e6c1e1",
+    "uuid": "5c6b3612-6b5b-4981-bc2d-06f3d074182f",
     "title": "",
     "fullFile": "",
     "file": "",
@@ -28,7 +28,7 @@
     "tests": [],
     "suites": [
       {
-        "uuid": "c8743a36-26a5-4a62-afd1-609366d77401",
+        "uuid": "3d93e9da-2af2-48ea-a9c1-4cb1236e2783",
         "title": "Array",
         "fullFile": "/home/travis/build/borenXue/webpack-alioss-plugin/test/index.js",
         "file": "/test/index.js",
@@ -37,7 +37,7 @@
         "tests": [],
         "suites": [
           {
-            "uuid": "d4efbbfa-3f68-4cb3-b9fc-98271c7059c8",
+            "uuid": "e5a41e76-9ece-4e07-b3ea-e396268bd23d",
             "title": "#calc-config",
             "fullFile": "/home/travis/build/borenXue/webpack-alioss-plugin/test/index.js",
             "file": "/test/index.js",
@@ -57,14 +57,14 @@
                 "code": "var plugin = new WebpackAliOSSPlugin(config);\nassert(_.isEqual(plugin.config, config), message);",
                 "err": {},
                 "isRoot": false,
-                "uuid": "91130f89-f1fe-4baa-afad-a33b74fc4519",
+                "uuid": "902beaac-1de4-4338-a360-63aeea425d06",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
             "passes": [
-              "91130f89-f1fe-4baa-afad-a33b74fc4519"
+              "902beaac-1de4-4338-a360-63aeea425d06"
             ],
             "failures": [],
             "pending": [],
@@ -75,7 +75,7 @@
             "_timeout": 2000
           },
           {
-            "uuid": "2d74b5cb-d3c1-41ac-b1f1-b5652bf6eafe",
+            "uuid": "eaa3d83b-4b72-4c19-8993-602b4d885e31",
             "title": "#calc-config",
             "fullFile": "/home/travis/build/borenXue/webpack-alioss-plugin/test/index.js",
             "file": "/test/index.js",
@@ -95,14 +95,14 @@
                 "code": "var cfg = _.cloneDeep(config);\ndelete cfg.auth.region;\nprocess.env.WEBPACK_ALIOSS_PLUGIN_REGION = '004';\nvar plugin = new WebpackAliOSSPlugin(cfg);\ncfg.auth.region = '004';\nassert(_.isEqual(plugin.config, cfg), message);",
                 "err": {},
                 "isRoot": false,
-                "uuid": "d16b47cd-a253-4ee5-b82b-970d9572458a",
+                "uuid": "24ffb0dc-ba92-40a7-a8cc-24df7d5c438c",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
             "passes": [
-              "d16b47cd-a253-4ee5-b82b-970d9572458a"
+              "24ffb0dc-ba92-40a7-a8cc-24df7d5c438c"
             ],
             "failures": [],
             "pending": [],
@@ -113,7 +113,7 @@
             "_timeout": 2000
           },
           {
-            "uuid": "bf13ec05-6b98-45b8-848a-3b76a6c4bbba",
+            "uuid": "736f17e3-649f-4666-b834-53072588bd85",
             "title": "#calc-config",
             "fullFile": "/home/travis/build/borenXue/webpack-alioss-plugin/test/index.js",
             "file": "/test/index.js",
@@ -133,14 +133,14 @@
                 "code": "process.env.WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_ID = '001';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_SECRET = '002';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_BUCKET = '003';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_REGION = '004';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_ENABLE_LOG = true;\nprocess.env.WEBPACK_ALIOSS_PLUGIN_IGNORE_ERROR = true;\nprocess.env.WEBPACK_ALIOSS_PLUGIN_REMOVE_MODE = false;\nprocess.env.WEBPACK_ALIOSS_PLUGIN_PREFIX = 'aa';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_EXCLUDE = /aa.*/;\nvar plugin = new WebpackAliOSSPlugin({\n  options: 'a',\n  exclude: /aa.*/\n});\nassert(_.isEqual(plugin.config, config), message);",
                 "err": {},
                 "isRoot": false,
-                "uuid": "1a526ee6-c4cc-419d-85e7-1772c1b42cb0",
+                "uuid": "1407a6b2-f4f9-40a6-b9b8-ee7e20d5b9e2",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
             "passes": [
-              "1a526ee6-c4cc-419d-85e7-1772c1b42cb0"
+              "1407a6b2-f4f9-40a6-b9b8-ee7e20d5b9e2"
             ],
             "failures": [],
             "pending": [],
