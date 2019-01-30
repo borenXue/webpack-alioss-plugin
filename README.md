@@ -2,10 +2,10 @@
 
 [![Travis CI](https://img.shields.io/travis/borenXue/webpack-alioss-plugin/master.svg)](https://travis-ci.org/borenXue/webpack-alioss-plugin)
 [![node version](https://img.shields.io/node/v/webpack-alioss-plugin.svg)](https://nodejs.org)
-<span style="position:relative;top: -5px;margin-left: 8px;">
-  <a style="margin-left: 15px;" href="https://git.io/fhMTi">更新记录</a>
-  <a style="margin-left: 15px;" href="https://git.io/fhMT0">测试报告</a>
-  <a style="margin-left: 15px;" href="https://git.io/fhMTa">eslint 报告</a>
+<span style="position:relative;top: -4px;margin-left: 8px;">
+  <a href="https://git.io/fhMTi">更新记录</a>
+  <a href="https://git.io/fhMT0">测试报告</a>
+  <a href="https://git.io/fhMTa">eslint 报告</a>
 </span>
 
 阿里云 OSS 上传插件, 可在 webpack 打包结束后将来 webpack 生成的文件自动上传到 OSS 中。
