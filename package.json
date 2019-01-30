@@ -11,6 +11,7 @@
   "author": "borenXue <boren.xue@outlook.com> (http://www.xueboren.com)",
   "main": "lib/index.js",
   "scripts": {
+    "build": "babel src --out-dir lib",
     "docs": "cp README.md docs && ./node_modules/gh-pages/bin/gh-pages.js -d docs --silent --repo https://${GITHUB_TOKEN}@github.com/borenXue/webpack-alioss-plugin.git",
     "lint": "npm-run-all --parallel lint:*",
     "lint:editconfig": "eclint check --block_comment_start '/**' --block_comment_end '*/'",

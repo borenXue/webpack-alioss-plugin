@@ -1,38 +1,34 @@
 sudo: false
 language: node_js
 
+node_js:
+  - 8
+  - 9
+
 branches:
   only:
     - master
 
-cache:
-  directories:
-    - $HOME/.npm
-    - $HOME/.yarn-cache
+cache: npm
 
-matrix:
+install: npm install
+script: npm run lint && npm run test
+
+jobs:
   include:
-    - os: linux
-      node_js: "7"
-      env: NO_WATCH_TESTS=1 JOB_PART=test
-    - os: linux
-      node_js: "6"
-      env: NO_WATCH_TESTS=1 JOB_PART=test
-    - os: osx
-      node_js: "7"
-      env: NO_WATCH_TESTS=1 JOB_PART=test
-  allow_failures:
-    - os: osx
-  fast_finish: true
-
-script: npm run travis:$JOB_PART
-script: npm run build
-
-after_success:
-  - echo 'test and build success ~_~'
+    - stage: release
+      node_js: lts/*
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script:
+          - npm run build
+          - pwd && ls && git status && git diff
+          - npm run semantic-release
+        after_success:
+          - - pwd && ls && git status && git diff
+          - echo 'test and build success ~_~'
 
 notifications:
-  slack:
-    rooms:
-      - enjoy-coding-team:8PUCn7lnInAnVS4IbYekutNy#general
-      - enjoy-coding-team:8PUCn7lnInAnVS4IbYekutNy#random
+  email:
+    - xueboren001@outlook.com
