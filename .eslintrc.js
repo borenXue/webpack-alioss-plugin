@@ -1,23 +1,14 @@
 module.exports = {
-  env: {
-    browser: false,
-    es6: true,
-    node: true
+  "root": true,
+  "parserOptions": {
+    "parser": "babel-eslint",
+    "sourceType": "module"
   },
-  root: true,
-  parser: 'babel-eslint',
-  parserOptions: {
-    sourceType: 'module'
+  "env": {
+    "node": true
   },
-  globals: {
+  "globals": {
+    "Promise": true
   },
-  extends: 'standard',
-  plugins: [],
-  'rules': {
-    'arrow-parens': 0,
-    'generator-star-spacing': 0,
-    'semi': 1,
-    'no-trailing-spaces': 1,
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
-  }
+  "extends": "eslint:recommended"
 }

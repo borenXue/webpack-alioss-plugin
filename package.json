@@ -1,54 +1,159 @@
 {
-    "name": "webpack-alioss-plugin",
-    "version": "1.4.7",
-    "description": "Ali oss-webpack auto upload files plugin ",
-    "main": "src/index.js",
-    "repository": "https://github.com/borenXue/webpack-alioss-plugin.git",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/borenXue/webpack-alioss-plugin/issues/new"
-    },
-    "scripts": {
-        "dev": "./node_modules/.bin/cross-env NODE_ENV=development && webpack-dev-server --inline --hot --colors --progress --config build/webpack.conf.js",
-        "build": "./node_modules/.bin/cross-env NODE_ENV=production && ./node_modules/.bin/webpack --config build/webpack.conf.js",
-        "eslint": "./node_modules/.bin/eslint --format node_modules/eslint-friendly-formatter src/index.js",
-        "eslint:html": "./node_modules/.bin/eslint --format html ./src/* -o ./dist/eslint/index.html",
-        "appveyor:test": "./node_modules/.bin/eslint --format node_modules/eslint-friendly-formatter src/index.js",
-        "travis:test": "npm run eslint"
-    },
-    "engines": {
-        "node": ">=6.0.0",
-        "npm": ">= 3.0.0"
-    },
-    "homepage": "http://www.xueboren.com",
-    "author": "borenXue <boren.xue@outlook.com> (http://www.xueboren.com)",
-    "dependencies": {
-        "address": "^1.0.1",
-        "ali-oss": "^4.8.0",
-        "chalk": "^1.1.3",
-        "co": "^4.6.0",
-        "lodash": "^4.17.4"
-    },
-    "devDependencies": {
-        "babel": "^6.23.0",
-        "babel-core": "^6.24.1",
-        "babel-eslint": "^7.2.3",
-        "babel-loader": "^7.0.0",
-        "babel-plugin-transform-runtime": "^6.23.0",
-        "babel-preset-es2015": "^6.24.1",
-        "babel-preset-stage-2": "^6.24.1",
-        "babel-runtime": "^6.26.0",
-        "cross-env": "^4.0.0",
-        "eslint": "^4.13.0",
-        "eslint-config-standard": "^10.2.1",
-        "eslint-friendly-formatter": "^2.0.7",
-        "eslint-loader": "^1.9.0",
-        "eslint-plugin-import": "^2.8.0",
-        "eslint-plugin-node": "^4.2.2",
-        "eslint-plugin-promise": "^3.5.0",
-        "eslint-plugin-standard": "^3.0.1",
-        "uglify-js": "^2.8.22",
-        "uglifyjs-webpack-plugin": "^0.4.3",
-        "webpack": "^2.4.1"
+  "name": "webpack-alioss-plugin",
+  "version": "2.0.0",
+  "description": "Ali oss-webpack auto upload files plugin ",
+  "homepage": "http://www.xueboren.com",
+  "bugs": {
+    "url": "https://github.com/borenXue/webpack-alioss-plugin/issues/new"
+  },
+  "repository": "https://github.com/borenXue/webpack-alioss-plugin.git",
+  "license": "MIT",
+  "author": "borenXue <boren.xue@outlook.com> (http://www.xueboren.com)",
+  "main": "lib/index.js",
+  "scripts": {
+    "docs": "cp README.md docs && ./node_modules/gh-pages/bin/gh-pages.js -d docs --silent --repo https://${GITHUB_TOKEN}@github.com/borenXue/webpack-alioss-plugin.git",
+    "lint": "npm-run-all --parallel lint:*",
+    "lint:editconfig": "eclint check --block_comment_start '/**' --block_comment_end '*/'",
+    "lint:eslint": "eslint --ext .js src --format html -o ./docs/eslint.html",
+    "semantic-release": "semantic-release",
+    "test": "mocha tests --recursive --compilers js:babel-core/register --reporter mochawesome --reporter-options reportDir=./docs/mocha,reportName=webpack-alioss-plugin,reportTitle=webpack-alioss-plugin,inlineAssets=true"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "lint-staged": {
+    "**/*": [
+      "eclint fix --block_comment_start '/**' --block_comment_end '*/'",
+      "git add",
+      "eclint check --block_comment_start '/**' --block_comment_end '*/'"
+    ],
+    "package.json": [
+      "sort-package-json",
+      "git add"
+    ],
+    "src/**/*.{js,vue}": [
+      "eslint --fix --ext .js,.vue src",
+      "git add",
+      "npm run lint:eslint"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "ali-oss": "^6.1.0",
+    "chalk": "^2.4.2",
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^7.4.0",
+    "@commitlint/config-conventional": "^7.3.1",
+    "@semantic-release/exec": "^3.3.2",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "conventional-changelog-cli": "^2.0.11",
+    "cz-conventional-changelog": "^2.1.0",
+    "eclint": "^2.8.1",
+    "eslint": "^5.12.1",
+    "gh-pages": "^2.0.1",
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.1",
+    "mocha": "^5.2.0",
+    "mochawesome": "^3.1.1",
+    "npm-run-all": "^4.1.5",
+    "semantic-release": "^15.13.3",
+    "sort-package-json": "^1.18.0"
+  },
+  "engines": {
+    "node": ">=8.0.0",
+    "npm": ">=5.0.0"
+  },
+  "release": {
+    "branch": "master",
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "angular",
+          "parserOpts": {
+            "noteKeywords": [
+              "BREAKING CHANGE",
+              "BREAKING CHANGES"
+            ]
+          },
+          "releaseRules": [
+            {
+              "type": "feat",
+              "release": "minor"
+            },
+            {
+              "type": "fix",
+              "release": "patch"
+            },
+            {
+              "type": "docs",
+              "release": "patch"
+            },
+            {
+              "type": "style",
+              "release": "patch"
+            },
+            {
+              "type": "refactor",
+              "scope": "src",
+              "release": "major"
+            },
+            {
+              "type": "perf",
+              "release": "minor"
+            },
+            {
+              "type": "test",
+              "release": "patch"
+            },
+            {
+              "type": "build",
+              "release": "patch"
+            }
+          ]
+        }
+      ],
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "angular",
+          "parserOpts": {
+            "noteKeywords": [
+              "BREAKING CHANGE",
+              "BREAKING CHANGES"
+            ]
+          },
+          "writerOpts": {
+            "commitsSort": [
+              "scope",
+              "subject"
+            ]
+          }
+        }
+      ],
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      [
+        "@semantic-release/exec",
+        {
+          "prepare": "pwd && ls && git status && git diff",
+          "publishCmd": "npm run docs"
+        }
+      ]
+    ]
+  }
 }
