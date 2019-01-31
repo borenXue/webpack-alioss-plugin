@@ -1,7 +1,20 @@
 const chalk = require('chalk')
 const _ = require('lodash');
 const AliOSS = require('ali-oss')
-const defaultConfig = require('./config')
+const defaultConfig = {
+  auth: {
+    accessKeyId: '',
+    accessKeySecret: '',
+    bucket: '',
+    region: ''
+  },
+  prefix: '',
+  exclude: /.*\.html$/,
+  enableLog: false,
+  ignoreError: false,
+  removeMode: true,
+  options: undefined
+}
 
 const red = chalk.red
 const green = chalk.bold.green
