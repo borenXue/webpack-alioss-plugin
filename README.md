@@ -28,6 +28,8 @@ npm install -D webpack-alioss-plugin
 
 ## 使用示例
 
+> **注意:** 需修改 `webpackConfig.output.publicPath` 为`prefix` oss 路径对应的访问 url, eg: `'//res.xueboren.com/auto_upload_ci/project-name/'`
+
 > 用法一: 设置配置项
 
 ```javascript
