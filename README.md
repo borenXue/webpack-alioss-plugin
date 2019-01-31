@@ -16,8 +16,8 @@
 * webpack 自动生成的 `js`、`css` 文件设置 `hash` 值, eg: `detail-question.34d71b4.js`
 * CDN 可设置为允许使用缓存, 提高加载速度
 * 个人服务器或企业服务器只发布 `html` 文件
-* 体积较小的图片文件直接使用 webpack 的 `url-loader` 自动打包到 js 文件中(base64)
-* 何种较大的图片手动上传至 OSS 中, 或通过服务端接口自动上传至 OSS
+* 体积较小的图片(300KB 以下)直接使用 webpack 的 `url-loader` 自动打包到 js 文件中(base64)
+* 体积较大的图片(300KB 以上)手动上传至 OSS 中, 或通过服务端接口自动上传至 OSS
 * OSS 安全: 使用阿里推荐的访问控制 ACL 来限制某个 `accessKey` 只能访问指定文件夹
 
 ## 安装
