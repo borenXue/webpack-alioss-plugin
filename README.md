@@ -28,9 +28,25 @@ npm install -D webpack-alioss-plugin
 
 ## 使用示例
 
-> **注意:** 需修改 `webpackConfig.output.publicPath` 为`prefix` oss 路径对应的访问 url, eg: `'//res.xueboren.com/auto_upload_ci/project-name/'`
+> **注意:** 需修改 `webpackConfig.output.publicPath` 为`prefix` oss 路径对应的访问 url, eg: `'//res.xueboren.com/auto_upload_ci/your-project-name/'`
 
-> 用法一: 设置配置项
+> 用法一: 结合环境变量 (**推荐**)
+
+```javascript
+// 先在 CI 的构建环境中设置以下环境变量:
+
+// WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_ID 对应配置项 accessKeyId
+// WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_SECRET 对应配置项 accessKeySecret
+// WEBPACK_ALIOSS_PLUGIN_BUCKET 对应配置项 bucket
+// WEBPACK_ALIOSS_PLUGIN_REGION 对应配置项 region
+// (可选, 默认为 'auto_upload_ci') WEBPACK_ALIOSS_PLUGIN_OSS_BASE_DIR 对应配置项 ossBaseDir
+
+const AliOssPlugin = require('webpack-alioss-plugin')
+
+webpackConfig.plugins.push(new AliOSSPlugin())
+```
+
+> 用法二: 设置配置项
 
 ```javascript
 const AliOssPlugin = require('webpack-alioss-plugin')
@@ -40,24 +56,8 @@ webpackConfig.plugins.push(new AliOSSPlugin({
   accessKeySecret: '', // 在阿里 OSS 控制台获取
   region: 'oss-cn-hangzhou', // OSS 服务节点, 示例: oss-cn-hangzhou
   bucket: 'abc', // OSS 存储空间, 在阿里 OSS 控制台获取
-  prefix: 'auto_upload_ci/test', // OSS 目录前缀; eg: auto_upload_ci/test
-}))
-```
-
-> 用法二: 结合环境变量 (**推荐**)
-
-```javascript
-// 先在构建环境中设置以下环境变量:
-
-// WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_ID 对应配置项 accessKeyId
-// WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_SECRET 对应配置项 accessKeySecret
-// WEBPACK_ALIOSS_PLUGIN_BUCKET 对应配置项 bucket
-// WEBPACK_ALIOSS_PLUGIN_REGION 对应配置项 region
-
-const AliOssPlugin = require('webpack-alioss-plugin')
-
-webpackConfig.plugins.push(new AliOSSPlugin({
-  prefix: '', // OSS 目录前缀; eg: auto_upload_ci/test
+  ossBaseDir: 'auto_upload_ci',
+  project: 'my-project-name', // 项目名(用于存放文件的直接目录)
 }))
 ```
 
@@ -78,10 +78,12 @@ exclude | - | `/.*\.html$/` | 即匹配该正则的文件名 不会被上传到 
 enableLog | `WEBPACK_ALIOSS_PLUGIN_ENABLE_LOG` | false | 是否输出详细的日志信息 |
 ignoreError | `WEBPACK_ALIOSS_PLUGIN_IGNORE_ERROR` | false | 上传过程中出现错误是否继续 webpack 构建 |
 removeMode | `WEBPACK_ALIOSS_PLUGIN_REMOVE_MODE` | true | 生成的文件自动上传至 OSS 后, 是否删除本地的对应文件 |
-prefix | `WEBPACK_ALIOSS_PLUGIN_PREFIX` | false | 目录前缀, 文件会上传到该指定目录下, 请确保 `accessKey` 有该目录的写权限 |
+~~prefix~~(已弃用) | ~~`WEBPACK_ALIOSS_PLUGIN_PREFIX`~~ | ~~false~~ | ~~目录前缀, 文件会上传到该指定目录下, 请确保 `accessKey` 有该目录的写权限~~ |
+ossBaseDir | `WEBPACK_ALIOSS_PLUGIN_OSS_BASE_DIR` | `auto_upload_ci` | OSS 中存放上传文件的一级目录名 |
+project | - | 默认会自动读取 `package.json` 中的 `name` | OSS 中存放上传文件的二级目录, 一般为项目名 |
 options | - | undefined | 对象类型. [可用于设置文件的请求头、超时时间等](https://github.com/ali-sdk/ali-oss#putname-file-options) |
 
-* prefix: 出于安全考虑推荐不使用根目录, 只给该 `accessKey` 赋予某个子文件夹的权限
+* ~~prefix~~: ~~出于安全考虑推荐不使用根目录, 只给该 `accessKey` 赋予某个子文件夹的权限~~
 * ignoreError: 如果上传过程中出现错误是否继续 webpack 构建
   - true: 忽略错误, 继续构建, webpack 不会报错
   - false: 中止构建, webpack 构建会以失败结束
