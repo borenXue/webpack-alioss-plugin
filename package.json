@@ -17,7 +17,7 @@
     "lint:editconfig": "eclint check --block_comment_start '/**' --block_comment_end '*/'",
     "lint:eslint": "eslint --ext .js src --format html -o ./docs/eslint.html",
     "semantic-release": "semantic-release",
-    "test": "mocha test --recursive --compilers js:babel-core/register --reporter mochawesome --reporter-options reportDir=./docs/mocha,reportName=webpack-alioss-plugin,reportTitle=webpack-alioss-plugin,inlineAssets=true"
+    "test": "mocha test --recursive --require babel-core/register --reporter mochawesome --reporter-options reportDir=./docs/mocha,reportName=webpack-alioss-plugin,reportTitle=webpack-alioss-plugin,inlineAssets=true"
   },
   "husky": {
     "hooks": {
@@ -55,6 +55,7 @@
     "@commitlint/cli": "^7.4.0",
     "@commitlint/config-conventional": "^7.3.1",
     "@semantic-release/exec": "^3.3.2",
+    "@semantic-release/git": "^7.0.8",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
@@ -148,6 +149,16 @@
       ],
       "@semantic-release/npm",
       "@semantic-release/github",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "package.json",
+            "package-lock.json"
+          ],
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ],
       [
         "@semantic-release/exec",
         {
