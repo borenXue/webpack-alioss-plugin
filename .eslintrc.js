@@ -8,7 +8,10 @@ module.exports = {
     "node": true
   },
   "globals": {
-    "Promise": true
+    "Promise": true,
+    // mocha 相关
+    "describe": true,
+    "it": true,
   },
   "extends": "eslint:recommended"
 }
