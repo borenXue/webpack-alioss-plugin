@@ -31,7 +31,7 @@ module.exports = class WebpackAliOSSPlugin {
 
   constructor(cfg) {
     // 优化级顺序: 项目配置 > 环境变量 > 默认配置
-    // debug && this.debug('默认配置:', defaultConfig)
+    this.debug('默认配置:', defaultConfig)
     const envConfig = {
       auth: {
         accessKeyId: process.env.WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_ID,
@@ -45,11 +45,11 @@ module.exports = class WebpackAliOSSPlugin {
       ossBaseDir: process.env.WEBPACK_ALIOSS_PLUGIN_OSS_BASE_DIR || '',
       prefix: process.env.WEBPACK_ALIOSS_PLUGIN_PREFIX,
     }
-    // debug && this.debug('环境变量配置:', envConfig)
-    // debug && this.debug('项目配置:', cfg)
+    this.debug('环境变量配置:', envConfig)
+    this.debug('项目配置:', cfg)
     this.config = _.mergeWith(_.cloneDeep(defaultConfig), envConfig, cfg || {}, configMergeCustomizer)
     this.calcPrefix()
-    // debug && this.debug('最终使用的配置:', this.config)
+    this.debug('最终使用的配置:', this.config)
     // 初始化阿里云 OSS 客户端
     this.client = AliOSS(this.config.auth)
   }
@@ -86,12 +86,13 @@ module.exports = class WebpackAliOSSPlugin {
       }
       
     }
+    this.debug('使用的 OSS 目录:', this.finalPrefix)
     return this.finalPrefix
   }
 
   uploadFiles(files, compilation) {
     return Promise.all(_.map(files, (file) => {
-      const uploadName = `${this.config.prefix}/${file.name}`.replace('//', '/')
+      const uploadName = `${this.calcPrefix()}/${file.name}`.replace('//', '/')
       log(green('\n\n 开始上传......'))
       return new Promise((resolve, reject) => {
         this.client.put(uploadName, Buffer.from(file.content), this.getOptions())
