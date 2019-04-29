@@ -52,10 +52,12 @@ webpackConfig.plugins.push(new AliOSSPlugin())
 const AliOssPlugin = require('webpack-alioss-plugin')
 
 webpackConfig.plugins.push(new AliOSSPlugin({
-  accessKeyId: '', // 在阿里 OSS 控制台获取
-  accessKeySecret: '', // 在阿里 OSS 控制台获取
-  region: 'oss-cn-hangzhou', // OSS 服务节点, 示例: oss-cn-hangzhou
-  bucket: 'abc', // OSS 存储空间, 在阿里 OSS 控制台获取
+  auth: {
+    accessKeyId: '', // 在阿里 OSS 控制台获取
+    accessKeySecret: '', // 在阿里 OSS 控制台获取
+    region: 'oss-cn-hangzhou', // OSS 服务节点, 示例: oss-cn-hangzhou
+    bucket: 'abc', // OSS 存储空间, 在阿里 OSS 控制台获取
+  },
   ossBaseDir: 'auto_upload_ci',
   project: 'my-project-name', // 项目名(用于存放文件的直接目录)
 }))
