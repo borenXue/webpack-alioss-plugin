@@ -31,7 +31,6 @@ module.exports = class WebpackAliOSSPlugin {
 
   constructor(cfg) {
     // 优化级顺序: 项目配置 > 环境变量 > 默认配置
-    this.debug('默认配置:', defaultConfig)
     const envConfig = {
       auth: {
         accessKeyId: process.env.WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_ID,
@@ -45,10 +44,11 @@ module.exports = class WebpackAliOSSPlugin {
       ossBaseDir: process.env.WEBPACK_ALIOSS_PLUGIN_OSS_BASE_DIR || '',
       prefix: process.env.WEBPACK_ALIOSS_PLUGIN_PREFIX,
     }
-    this.debug('环境变量配置:', envConfig)
-    this.debug('项目配置:', cfg)
     this.config = _.mergeWith(_.cloneDeep(defaultConfig), envConfig, cfg || {}, configMergeCustomizer)
     this.calcPrefix()
+    this.debug('默认配置:', defaultConfig)
+    this.debug('环境变量配置:', envConfig)
+    this.debug('项目配置:', cfg)
     this.debug('最终使用的配置:', this.config)
     // 初始化阿里云 OSS 客户端
     this.client = AliOSS(this.config.auth)
@@ -84,21 +84,24 @@ module.exports = class WebpackAliOSSPlugin {
       } else {
         this.finalPrefix = `${this.config.ossBaseDir}/${this.config.project}`
       }
-      
+
     }
     this.debug('使用的 OSS 目录:', this.finalPrefix)
     return this.finalPrefix
   }
 
   uploadFiles(files, compilation) {
+    const fileCount = files.length
+    let i = 1
     return Promise.all(_.map(files, (file) => {
       const uploadName = `${this.calcPrefix()}/${file.name}`.replace('//', '/')
-      log(green('\n\n 开始上传......'))
+      log(green('\n\n 开始上传......'), uploadName)
       return new Promise((resolve, reject) => {
         this.client.put(uploadName, Buffer.from(file.content), this.getOptions())
           .then(() => {
-            log(`上传成功: ${file.name}`)
+            log(`上传成功 ${i++}/${fileCount}: ${file.name}`)
             this.config.removeMode && delete compilation.assets[file.name]
+            resolve()
           })
           .catch(err => reject(err))
       })
@@ -110,7 +113,13 @@ module.exports = class WebpackAliOSSPlugin {
 
   // 从 compilation 对象中提取资源文件
   pickupAssetsFiles(compilation) {
-    const matched = _.filter(compilation.asserts, (value, name) => !this.config.exclude.test(name))
+    const matched = {}
+    const keys = Object.keys(compilation.assets)
+    for (let i = 0; i < keys.length; i++) {
+      if (!this.config.exclude.test(keys[i])) {
+        matched[keys[i]] = compilation.assets[keys[i]]
+      }
+    }
     return _.map(matched, (value, name) => ({
       name,
       path: value.existsAt,
