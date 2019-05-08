@@ -19,6 +19,7 @@ var config = {
   enableLog: true,
   ignoreError: true,
   removeMode: false,
+  gzip: true,
   options: 'a'
 }
 
@@ -102,6 +103,7 @@ describe('参数初始化', function() {
         enableLog: false,
         ignoreError: false,
         removeMode: true,
+        gzip: true,
         options: undefined
       }), message);
       assert(_.isEqual(plugin.finalPrefix, 'default_dir/webpack-alioss-plugin'), '-')

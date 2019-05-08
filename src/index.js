@@ -2,6 +2,9 @@ const path = require('path')
 const chalk = require('chalk')
 const _ = require('lodash');
 const AliOSS = require('ali-oss')
+const Buffer = require('buffer').Buffer
+const zlib = require('zlib')
+
 const defaultConfig = {
   auth: {
     accessKeyId: '',
@@ -18,6 +21,7 @@ const defaultConfig = {
   enableLog: false,
   ignoreError: false,
   removeMode: true,
+  gzip: true,
   options: undefined
 }
 
@@ -105,30 +109,48 @@ module.exports = class WebpackAliOSSPlugin {
   uploadFile(file, idx, files, compilation) {
     return new Promise((resolve, reject) => {
       const fileCount = files.length
-      const uploadName = `${this.calcPrefix()}/${file.name}`.replace('//', '/')
-      const self = this
-      function _uploadAction() {
-        file.$retryTime++
-        log(`开始上传 ${idx}/${fileCount}: ${file.$retryTime > 1 ? '第' + (file.$retryTime - 1) + '次重试' : ''}`, uploadName)
-        self.client.put(uploadName, Buffer.from(file.content), self.getOptions())
-          .then(() => {
-            log(`上传成功 ${idx}/${fileCount}: ${uploadName}`)
-            self.config.removeMode && delete compilation.assets[file.name]
-            resolve()
-          })
-          .catch(err => {
-            if (file.$retryTime < self.config.retry + 1) {
-              _uploadAction()
-            } else {
-              reject(err)
-            }
-          })
-      }
-      _uploadAction()
+      getFileContentBuffer(file, this.config.gzip).then((contentBuffer) => {
+        const opt = this.getOptions(this.config.gzip)
+        const self = this
+        const uploadName = `${this.calcPrefix()}/${file.name}`.replace('//', '/')
+        function _uploadAction() {
+          file.$retryTime++
+          log(`开始上传 ${idx}/${fileCount}: ${file.$retryTime > 1 ? '第' + (file.$retryTime - 1) + '次重试' : ''}`, uploadName)
+          self.client.put(uploadName, contentBuffer, opt)
+            .then(() => {
+              log(`上传成功 ${idx}/${fileCount}: ${uploadName}`)
+              self.config.removeMode && delete compilation.assets[file.name]
+              resolve()
+            })
+            .catch(err => {
+              if (file.$retryTime < self.config.retry + 1) {
+                _uploadAction()
+              } else {
+                reject(err)
+              }
+            })
+        }
+        _uploadAction()
+      }).catch(err => {
+        reject(err)
+      })
     })
   }
-  getOptions() {
-    return _.isPlainObject(this.config.options) ? this.config.options : undefined
+  getOptions(gzip) {
+    const optValid = _.isPlainObject(this.config.options)
+    if (gzip) {
+      if (optValid) {
+        if (!this.config.options.headers) this.config.options.headers = {}
+        this.config.options.headers['Content-Encoding'] = 'gzip'
+      } else {
+        return {
+          headers: { 'Content-Encoding': 'gzip' }
+        }
+      }
+    } else {
+      return optValid ? this.config.options : undefined
+    }
+    return undefined
   }
 
   // 从 compilation 对象中提取资源文件
@@ -169,6 +191,18 @@ function extraEnvBoolean(val) {
   if (val && val === 'false') {
     return false
   }
+}
+
+function getFileContentBuffer(file, gzipVal) {
+  const gzip = typeof gzipVal === 'number' || gzipVal === true ? true : false
+  const opts = typeof gzipVal === 'number' ? { level: gzipVal } : {}
+  if (!gzip) return Promise.resolve(Buffer.from(file.content))
+  return new Promise((resolve, reject) => {
+    zlib.gzip(Buffer.from(file.content), opts, (err, gzipBuffer) => {
+      if (err) reject(err)
+      resolve(gzipBuffer)
+    })
+  })
 }
 
 // 配置合并器
