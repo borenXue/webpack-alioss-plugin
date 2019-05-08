@@ -11,6 +11,7 @@ var config = {
     bucket: '003',
     region: '004'
   },
+  retry: 3,
   ossBaseDir: 'auto_upload_ci',
   project: '',
   prefix: 'aa',
@@ -93,6 +94,7 @@ describe('参数初始化', function() {
           bucket: '003',
           region: '004'
         },
+        retry: 3,
         ossBaseDir: 'default_dir',
         project: 'webpack-alioss-plugin',
         prefix: '',

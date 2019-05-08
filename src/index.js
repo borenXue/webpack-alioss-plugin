@@ -9,6 +9,7 @@ const defaultConfig = {
     bucket: '',
     region: ''
   },
+  retry: 3, // 重试次数: number(>=0)
   // prefix 或者 ossBaseDir + project 二选一
   ossBaseDir: 'auto_upload_ci',
   project: '',
@@ -45,6 +46,9 @@ module.exports = class WebpackAliOSSPlugin {
       prefix: process.env.WEBPACK_ALIOSS_PLUGIN_PREFIX,
     }
     this.config = _.mergeWith(_.cloneDeep(defaultConfig), envConfig, cfg || {}, configMergeCustomizer)
+    if (typeof this.config.retry !== 'number' || this.config.retry < 0) {
+      this.config.retry = 0
+    }
     this.calcPrefix()
     this.debug('默认配置:', defaultConfig)
     this.debug('环境变量配置:', envConfig)
@@ -57,13 +61,14 @@ module.exports = class WebpackAliOSSPlugin {
   apply(compiler) {
     compiler.plugin('emit', (compilation, cb) => {
       const files = this.pickupAssetsFiles(compilation)
+      log(`${green('\nOSS 上传开始......')}`)
       this.uploadFiles(files, compilation)
         .then(() => {
-          log(`\n${green('OSS 上传完成\n')}`)
+          log(`${green('OSS 上传完成\n')}`)
           cb()
         })
         .catch((err) => {
-          log(`\n${red('OSS 上传出错')}::: ${red(err.code)}-${red(err.name)}: ${red(err.message)}`)
+          log(`${red('OSS 上传出错')}::: ${red(err.code)}-${red(err.name)}: ${red(err.message)}`)
           this.config.ignoreError || compilation.errors.push(err)
           cb()
         })
@@ -91,21 +96,36 @@ module.exports = class WebpackAliOSSPlugin {
   }
 
   uploadFiles(files, compilation) {
-    const fileCount = files.length
     let i = 1
     return Promise.all(_.map(files, (file) => {
+      file.$retryTime = 0
+      return this.uploadFile(file, i++, files, compilation)
+    }))
+  }
+  uploadFile(file, idx, files, compilation) {
+    return new Promise((resolve, reject) => {
+      const fileCount = files.length
       const uploadName = `${this.calcPrefix()}/${file.name}`.replace('//', '/')
-      log(green('\n\n 开始上传......'), uploadName)
-      return new Promise((resolve, reject) => {
-        this.client.put(uploadName, Buffer.from(file.content), this.getOptions())
+      const self = this
+      function _uploadAction() {
+        file.$retryTime++
+        log(`开始上传 ${idx}/${fileCount}: ${file.$retryTime > 1 ? '第' + (file.$retryTime - 1) + '次重试' : ''}`, uploadName)
+        self.client.put(uploadName, Buffer.from(file.content), self.getOptions())
           .then(() => {
-            log(`上传成功 ${i++}/${fileCount}: ${file.name}`)
-            this.config.removeMode && delete compilation.assets[file.name]
+            log(`上传成功 ${idx}/${fileCount}: ${uploadName}`)
+            self.config.removeMode && delete compilation.assets[file.name]
             resolve()
           })
-          .catch(err => reject(err))
-      })
-    }))
+          .catch(err => {
+            if (file.$retryTime < self.config.retry + 1) {
+              _uploadAction()
+            } else {
+              reject(err)
+            }
+          })
+      }
+      _uploadAction()
+    })
   }
   getOptions() {
     return _.isPlainObject(this.config.options) ? this.config.options : undefined
