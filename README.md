@@ -13,6 +13,9 @@
 * 上传失败后自动重试 (默认重试3次)
 * gzip 压缩后再上传 (默认开启)
   * CDN 全局 gzip 是否开启不影响该功能 - 若上传的文件的 header 设置为 gzip, 则 CDN 不会再次对该文件进行 gzip 压缩
+* 上传前添加检测机制
+  * 若已存在, 则可不重复上传
+  * 对于类似 `abc.js` 这种不带 hash 值的文件, 可通过 `existCheck: false` 来取消该功能
 
 > **最佳实践:**
 
@@ -83,6 +86,7 @@ region | `WEBPACK_ALIOSS_PLUGIN_REGION` | 空 | OSS 服务节点 |
 exclude | - | `/.*\.html$/` | 即匹配该正则的文件名 不会被上传到 OSS |
 retry | - | 3 | 上传失败后重试次数, 0 代表不重试 |
 gzip | - | `true` | 是否在上传前进行 gzip 压缩 |
+existCheck | - | `true` | 上传前是否先检测已存在(已存在则不重复上传, 不存在才进行上传) |
 enableLog | `WEBPACK_ALIOSS_PLUGIN_ENABLE_LOG` | false | 是否输出详细的日志信息 |
 ignoreError | `WEBPACK_ALIOSS_PLUGIN_IGNORE_ERROR` | false | 上传过程中出现错误是否继续 webpack 构建 |
 removeMode | `WEBPACK_ALIOSS_PLUGIN_REMOVE_MODE` | true | 生成的文件自动上传至 OSS 后, 是否删除本地的对应文件 |

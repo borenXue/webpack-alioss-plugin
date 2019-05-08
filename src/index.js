@@ -13,6 +13,7 @@ const defaultConfig = {
     region: ''
   },
   retry: 3, // 重试次数: number(>=0)
+  existCheck: false, // true: 直接上传、false: 先检测,若已存在则不重新上传(不报错)
   // prefix 或者 ossBaseDir + project 二选一
   ossBaseDir: 'auto_upload_ci',
   project: '',
@@ -103,16 +104,39 @@ module.exports = class WebpackAliOSSPlugin {
     let i = 1
     return Promise.all(_.map(files, (file) => {
       file.$retryTime = 0
-      return this.uploadFile(file, i++, files, compilation)
+      const uploadName = `${this.calcPrefix()}/${file.name}`.replace('//', '/')
+      // 先检测是否存在, 不存在则上传 TODO: 检测过程的日志打印
+      if (this.config.existCheck !== true) {
+        return this.uploadFile(file, i++, files, compilation, uploadName)
+      } else {
+        return new Promise((resolve, reject) => {
+          this.client.list({
+            prefix: uploadName,
+            'max-keys': 1
+          }).then(res => {
+            if (res.objects && res.objects.length > 0) {
+              const timeStr = getTimeStr(new Date(res.objects[0].lastModified))
+              log(`${green('已存在,免上传')} (上传于 ${timeStr}) ${++i}/${files.length}: ${uploadName}`)
+              this.config.removeMode && delete compilation.assets[file.name]
+              resolve()
+            } else {
+              throw new Error('not exist & need upload')
+            }
+          }).catch(() => {
+            this.uploadFile(file, i++, files, compilation, uploadName)
+              .then((...rest) => resolve(rest))
+              .catch(err => reject(err))
+          })
+        })
+      }
     }))
   }
-  uploadFile(file, idx, files, compilation) {
+  uploadFile(file, idx, files, compilation, uploadName) {
     return new Promise((resolve, reject) => {
       const fileCount = files.length
       getFileContentBuffer(file, this.config.gzip).then((contentBuffer) => {
         const opt = this.getOptions(this.config.gzip)
         const self = this
-        const uploadName = `${this.calcPrefix()}/${file.name}`.replace('//', '/')
         function _uploadAction() {
           file.$retryTime++
           log(`开始上传 ${idx}/${fileCount}: ${file.$retryTime > 1 ? '第' + (file.$retryTime - 1) + '次重试' : ''}`, uploadName)
@@ -191,6 +215,10 @@ function extraEnvBoolean(val) {
   if (val && val === 'false') {
     return false
   }
+}
+
+function getTimeStr(d) {
+  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()} ${d.getHours()}:${d.getMinutes()}`
 }
 
 function getFileContentBuffer(file, gzipVal) {
