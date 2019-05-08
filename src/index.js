@@ -13,7 +13,7 @@ const defaultConfig = {
     region: ''
   },
   retry: 3, // 重试次数: number(>=0)
-  existCheck: false, // true: 直接上传、false: 先检测,若已存在则不重新上传(不报错)
+  existCheck: true, // true: 直接上传、false: 先检测,若已存在则不重新上传(不报错)
   // prefix 或者 ossBaseDir + project 二选一
   ossBaseDir: 'auto_upload_ci',
   project: '',

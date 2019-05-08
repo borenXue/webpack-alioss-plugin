@@ -12,7 +12,7 @@ var config = {
     region: '004'
   },
   retry: 3,
-  existCheck: false,
+  existCheck: true,
   ossBaseDir: 'auto_upload_ci',
   project: '',
   prefix: 'aa',
@@ -97,7 +97,7 @@ describe('参数初始化', function() {
           region: '004'
         },
         retry: 3,
-        existCheck: false,
+        existCheck: true,
         ossBaseDir: 'default_dir',
         project: 'webpack-alioss-plugin',
         prefix: '',
