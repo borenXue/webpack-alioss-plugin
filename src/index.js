@@ -166,6 +166,7 @@ module.exports = class WebpackAliOSSPlugin {
       if (optValid) {
         if (!this.config.options.headers) this.config.options.headers = {}
         this.config.options.headers['Content-Encoding'] = 'gzip'
+        return this.config.options;
       } else {
         return {
           headers: { 'Content-Encoding': 'gzip' }
