@@ -166,7 +166,7 @@ module.exports = class WebpackAliOSSPlugin {
       if (optValid) {
         if (!this.config.options.headers) this.config.options.headers = {}
         this.config.options.headers['Content-Encoding'] = 'gzip'
-        return this.config.options;
+        return this.config.options
       } else {
         return {
           headers: { 'Content-Encoding': 'gzip' }
@@ -175,7 +175,6 @@ module.exports = class WebpackAliOSSPlugin {
     } else {
       return optValid ? this.config.options : undefined
     }
-    return undefined
   }
 
   // 从 compilation 对象中提取资源文件
