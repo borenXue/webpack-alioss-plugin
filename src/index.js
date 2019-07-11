@@ -47,7 +47,7 @@ module.exports = class WebpackAliOSSPlugin {
       enableLog: extraEnvBoolean(process.env.WEBPACK_ALIOSS_PLUGIN_ENABLE_LOG),
       ignoreError: extraEnvBoolean(process.env.WEBPACK_ALIOSS_PLUGIN_IGNORE_ERROR),
       removeMode: extraEnvBoolean(process.env.WEBPACK_ALIOSS_PLUGIN_REMOVE_MODE),
-      ossBaseDir: process.env.WEBPACK_ALIOSS_PLUGIN_OSS_BASE_DIR || '',
+      ossBaseDir: process.env.WEBPACK_ALIOSS_PLUGIN_OSS_BASE_DIR,
       prefix: process.env.WEBPACK_ALIOSS_PLUGIN_PREFIX,
     }
     this.config = _.mergeWith(_.cloneDeep(defaultConfig), envConfig, cfg || {}, configMergeCustomizer)
