@@ -51,7 +51,7 @@ npm install -D webpack-alioss-plugin
 // WEBPACK_ALIOSS_PLUGIN_REGION 对应配置项 region
 // (可选, 默认为 'auto_upload_ci') WEBPACK_ALIOSS_PLUGIN_OSS_BASE_DIR 对应配置项 ossBaseDir
 
-const AliOssPlugin = require('webpack-alioss-plugin')
+const AliOSSPlugin = require('webpack-alioss-plugin')
 
 webpackConfig.plugins.push(new AliOSSPlugin())
 ```
@@ -59,7 +59,7 @@ webpackConfig.plugins.push(new AliOSSPlugin())
 > 用法二: 设置配置项
 
 ```javascript
-const AliOssPlugin = require('webpack-alioss-plugin')
+const AliOSSPlugin = require('webpack-alioss-plugin')
 
 webpackConfig.plugins.push(new AliOSSPlugin({
   auth: {
