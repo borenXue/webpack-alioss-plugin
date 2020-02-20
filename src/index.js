@@ -112,9 +112,10 @@ module.exports = class WebpackAliOSSPlugin {
         return new Promise((resolve, reject) => {
           this.client.list({
             prefix: uploadName,
-            'max-keys': 1
+            'max-keys': 50
           }).then(res => {
-            if (res.objects && res.objects.length > 0) {
+            const arr = (res.objects || []).filter(item => item.name === uploadName)
+            if (arr && arr.length > 0) {
               const timeStr = getTimeStr(new Date(res.objects[0].lastModified))
               log(`${green('已存在,免上传')} (上传于 ${timeStr}) ${++i}/${files.length}: ${uploadName}`)
               this.config.removeMode && delete compilation.assets[file.name]
