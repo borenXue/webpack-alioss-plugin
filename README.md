@@ -73,6 +73,25 @@ webpackConfig.plugins.push(new AliOSSPlugin({
 }))
 ```
 
+## 使用示例 - vue.config.js 示例
+
+```javascript
+const WebpackAliossPlugin = require('webpack-alioss-plugin');
+
+const isProduction = process.env.NODE_ENV === 'production';
+
+module.exports = {
+  publicPath: isProduction ? '//res.xueboren.com/auto_upload_ci/your-project-name/' : '',
+  configureWebpack: {
+    plugins: isProduction ? [
+      new WebpackAliossPlugin(),
+    ] : [],
+  },
+};
+```
+
+
+
 ## 参数说明
 
 > 为了防止 OSS 的 accessKey 及 accessKeySecret 被提交到代码仓库, 本插件提供了环境变量的支持, 所有参数及其环境变量对应关系参考下表。
