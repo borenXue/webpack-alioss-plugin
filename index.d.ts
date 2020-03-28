@@ -1,5 +1,5 @@
 export default class WebpackAliOSSPlugin {
-  constructor(cfg: WebpackAliOSSPluginOptions)
+  constructor(cfg?: WebpackAliOSSPluginOptions)
 }
 
 export interface WebpackAliOSSPluginOptions {
