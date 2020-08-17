@@ -40,16 +40,16 @@ module.exports = class WebpackAliOSSPlugin {
     // 优化级顺序: 项目配置 > 环境变量 > 默认配置
     const envConfig = {
       auth: {
-        accessKeyId: process.env[`${cfg.envPrefix || defaultConfig.envPrefix}WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_ID`],
-        accessKeySecret: process.env[`${cfg.envPrefix || defaultConfig.envPrefix}WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_SECRET`],
-        bucket: process.env[`${cfg.envPrefix || defaultConfig.envPrefix}WEBPACK_ALIOSS_PLUGIN_BUCKET`],
-        region: process.env[`${cfg.envPrefix || defaultConfig.envPrefix}WEBPACK_ALIOSS_PLUGIN_REGION`],
+        accessKeyId: process.env[`${(cfg || {}).envPrefix || defaultConfig.envPrefix}WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_ID`],
+        accessKeySecret: process.env[`${(cfg || {}).envPrefix || defaultConfig.envPrefix}WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_SECRET`],
+        bucket: process.env[`${(cfg || {}).envPrefix || defaultConfig.envPrefix}WEBPACK_ALIOSS_PLUGIN_BUCKET`],
+        region: process.env[`${(cfg || {}).envPrefix || defaultConfig.envPrefix}WEBPACK_ALIOSS_PLUGIN_REGION`],
       },
-      enableLog: extraEnvBoolean(process.env[`${cfg.envPrefix || defaultConfig.envPrefix}WEBPACK_ALIOSS_PLUGIN_ENABLE_LOG`]),
-      ignoreError: extraEnvBoolean(process.env[`${cfg.envPrefix || defaultConfig.envPrefix}WEBPACK_ALIOSS_PLUGIN_IGNORE_ERROR`]),
-      removeMode: extraEnvBoolean(process.env[`${cfg.envPrefix || defaultConfig.envPrefix}WEBPACK_ALIOSS_PLUGIN_REMOVE_MODE`]),
-      ossBaseDir: process.env[`${cfg.envPrefix || defaultConfig.envPrefix}WEBPACK_ALIOSS_PLUGIN_OSS_BASE_DIR`],
-      prefix: process.env[`${cfg.envPrefix || defaultConfig.envPrefix}WEBPACK_ALIOSS_PLUGIN_PREFIX`],
+      enableLog: extraEnvBoolean(process.env[`${(cfg || {}).envPrefix || defaultConfig.envPrefix}WEBPACK_ALIOSS_PLUGIN_ENABLE_LOG`]),
+      ignoreError: extraEnvBoolean(process.env[`${(cfg || {}).envPrefix || defaultConfig.envPrefix}WEBPACK_ALIOSS_PLUGIN_IGNORE_ERROR`]),
+      removeMode: extraEnvBoolean(process.env[`${(cfg || {}).envPrefix || defaultConfig.envPrefix}WEBPACK_ALIOSS_PLUGIN_REMOVE_MODE`]),
+      ossBaseDir: process.env[`${(cfg || {}).envPrefix || defaultConfig.envPrefix}WEBPACK_ALIOSS_PLUGIN_OSS_BASE_DIR`],
+      prefix: process.env[`${(cfg || {}).envPrefix || defaultConfig.envPrefix}WEBPACK_ALIOSS_PLUGIN_PREFIX`],
     }
     this.config = _.mergeWith(_.cloneDeep(defaultConfig), envConfig, cfg || {}, configMergeCustomizer)
     if (typeof this.config.retry !== 'number' || this.config.retry < 0) {
