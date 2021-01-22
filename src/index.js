@@ -65,20 +65,30 @@ module.exports = class WebpackAliOSSPlugin {
   }
 
   apply(compiler) {
-    compiler.plugin('emit', (compilation, cb) => {
-      const files = this.pickupAssetsFiles(compilation)
-      log(`${green('\nOSS 上传开始......')}`)
-      this.uploadFiles(files, compilation)
-        .then(() => {
-          log(`${green('OSS 上传完成\n')}`)
-          cb()
-        })
-        .catch((err) => {
-          log(`${red('OSS 上传出错')}::: ${red(err.code)}-${red(err.name)}: ${red(err.message)}`)
-          this.config.ignoreError || compilation.errors.push(err)
-          cb()
-        })
-    })
+    if (compiler.hooks && compiler.hooks.emit) { // webpack 5
+      compiler.hooks.emit.tapAsync('WebpackAliOSSPlugin', (compilation, cb) => {
+        this.pluginEmitFn(compilation, cb)
+      });
+    } else {
+      compiler.plugin('emit', (compilation, cb) => {
+        this.pluginEmitFn(compilation, cb)
+      })
+    }
+  }
+
+  pluginEmitFn(compilation, cb) {
+    const files = this.pickupAssetsFiles(compilation)
+    log(`${green('\nOSS 上传开始......')}`)
+    this.uploadFiles(files, compilation)
+      .then(() => {
+        log(`${green('OSS 上传完成\n')}`)
+        cb()
+      })
+      .catch((err) => {
+        log(`${red('OSS 上传出错')}::: ${red(err.code)}-${red(err.name)}: ${red(err.message)}`)
+        this.config.ignoreError || compilation.errors.push(err)
+        cb()
+      })
   }
 
   calcPrefix() {
