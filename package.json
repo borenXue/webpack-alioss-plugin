@@ -1,6 +1,6 @@
 {
   "name": "webpack-alioss-plugin",
-  "version": "2.3.2",
+  "version": "2.4.0",
   "description": "Ali oss-webpack auto upload files plugin ",
   "homepage": "http://www.xueboren.com",
   "bugs": {
@@ -73,7 +73,7 @@
     "mocha": "^5.2.0",
     "mochawesome": "^3.1.1",
     "npm-run-all": "^4.1.5",
-    "semantic-release": "^15.13.3",
+    "semantic-release": "^17.3.6",
     "sort-package-json": "^1.18.0"
   },
   "engines": {
