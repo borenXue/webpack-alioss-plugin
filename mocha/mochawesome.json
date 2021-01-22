@@ -5,9 +5,9 @@
     "passes": 6,
     "pending": 0,
     "failures": 0,
-    "start": "2021-01-22T09:51:49.452Z",
-    "end": "2021-01-22T09:51:49.480Z",
-    "duration": 28,
+    "start": "2021-01-22T10:36:09.084Z",
+    "end": "2021-01-22T10:36:09.115Z",
+    "duration": 31,
     "testsRegistered": 6,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -19,7 +19,7 @@
     "pendingPercentClass": "danger"
   },
   "suites": {
-    "uuid": "079e3364-5248-436e-9cda-d784711308a8",
+    "uuid": "ffdcba18-7ccc-41a2-b487-eb05c4cf002a",
     "title": "",
     "fullFile": "",
     "file": "",
@@ -28,7 +28,7 @@
     "tests": [],
     "suites": [
       {
-        "uuid": "fe4c1bab-5f96-4a11-9862-feb92cbec29d",
+        "uuid": "2edfa719-d5b9-4d20-9bba-154ff32ce71a",
         "title": "参数初始化",
         "fullFile": "/home/travis/build/borenXue/webpack-alioss-plugin/test/index.js",
         "file": "/test/index.js",
@@ -37,7 +37,7 @@
         "tests": [],
         "suites": [
           {
-            "uuid": "b3e53f88-0bc4-41e2-a140-8ec928f4ac2b",
+            "uuid": "ea7eefb0-f01d-4705-a0ad-101a9e0ce081",
             "title": "#calc-config",
             "fullFile": "/home/travis/build/borenXue/webpack-alioss-plugin/test/index.js",
             "file": "/test/index.js",
@@ -57,14 +57,14 @@
                 "code": "clearEnv();\nvar plugin = new WebpackAliOSSPlugin(config);\nassert(_.isEqual(plugin.config, config), message);",
                 "err": {},
                 "isRoot": false,
-                "uuid": "e565b931-17e8-4336-a28d-639bd86681dc",
+                "uuid": "479eb879-fc01-4239-b21e-e3b0b943cac9",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
             "passes": [
-              "e565b931-17e8-4336-a28d-639bd86681dc"
+              "479eb879-fc01-4239-b21e-e3b0b943cac9"
             ],
             "failures": [],
             "pending": [],
@@ -75,7 +75,7 @@
             "_timeout": 2000
           },
           {
-            "uuid": "6f1c5996-258c-4d56-9d1d-1e9c87df21b8",
+            "uuid": "f2a2bff4-5183-422e-a432-d0fa5ca1cb32",
             "title": "#calc-config",
             "fullFile": "/home/travis/build/borenXue/webpack-alioss-plugin/test/index.js",
             "file": "/test/index.js",
@@ -86,7 +86,7 @@
                 "title": "用户参数、环境变量、默认参数合并: auth.region 使用环境变量",
                 "fullTitle": "参数初始化 #calc-config 用户参数、环境变量、默认参数合并: auth.region 使用环境变量",
                 "timedOut": false,
-                "duration": 1,
+                "duration": 2,
                 "state": "passed",
                 "speed": "fast",
                 "pass": true,
@@ -95,25 +95,25 @@
                 "code": "clearEnv();\nvar cfg = _.cloneDeep(config);\ndelete cfg.auth.region;\nprocess.env.WEBPACK_ALIOSS_PLUGIN_REGION = '004';\nvar plugin = new WebpackAliOSSPlugin(cfg);\ncfg.auth.region = '004';\nassert(_.isEqual(plugin.config, cfg), message);",
                 "err": {},
                 "isRoot": false,
-                "uuid": "171343b9-9fd7-4922-9e9a-0de299f98f14",
+                "uuid": "3f561320-1fbf-420d-a552-263ecdb14610",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
             "passes": [
-              "171343b9-9fd7-4922-9e9a-0de299f98f14"
+              "3f561320-1fbf-420d-a552-263ecdb14610"
             ],
             "failures": [],
             "pending": [],
             "skipped": [],
-            "duration": 1,
+            "duration": 2,
             "root": false,
             "rootEmpty": false,
             "_timeout": 2000
           },
           {
-            "uuid": "156d351b-2339-422c-bdb3-64402af66581",
+            "uuid": "7a3a5867-22e2-4f58-b6b5-25b7f156c921",
             "title": "#calc-config",
             "fullFile": "/home/travis/build/borenXue/webpack-alioss-plugin/test/index.js",
             "file": "/test/index.js",
@@ -124,7 +124,7 @@
                 "title": "环境变量、默认参数合并: auth.region 使用环境变量",
                 "fullTitle": "参数初始化 #calc-config 环境变量、默认参数合并: auth.region 使用环境变量",
                 "timedOut": false,
-                "duration": 1,
+                "duration": 2,
                 "state": "passed",
                 "speed": "fast",
                 "pass": true,
@@ -133,25 +133,25 @@
                 "code": "clearEnv();\nprocess.env.WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_ID = '001';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_SECRET = '002';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_BUCKET = '003';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_REGION = '004';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_ENABLE_LOG = true;\nprocess.env.WEBPACK_ALIOSS_PLUGIN_IGNORE_ERROR = true;\nprocess.env.WEBPACK_ALIOSS_PLUGIN_REMOVE_MODE = false;\nprocess.env.WEBPACK_ALIOSS_PLUGIN_PREFIX = 'aa';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_EXCLUDE = /aa.*/;\nvar plugin = new WebpackAliOSSPlugin({\n  options: 'a',\n  exclude: /aa.*/,\n  ossBaseDir: 'auto_upload_ci',\n  project: ''\n});\nassert(_.isEqual(plugin.config, config), message);",
                 "err": {},
                 "isRoot": false,
-                "uuid": "f22205ee-4973-4df5-8c37-4f6fd4253d61",
+                "uuid": "44427bea-5d0c-4f38-b680-3c7aadaf2af4",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
             "passes": [
-              "f22205ee-4973-4df5-8c37-4f6fd4253d61"
+              "44427bea-5d0c-4f38-b680-3c7aadaf2af4"
             ],
             "failures": [],
             "pending": [],
             "skipped": [],
-            "duration": 1,
+            "duration": 2,
             "root": false,
             "rootEmpty": false,
             "_timeout": 2000
           },
           {
-            "uuid": "8e61740d-68f7-437b-b419-e223dbab72bb",
+            "uuid": "a7d7152c-324f-414a-b340-b13c0fa4c358",
             "title": "#npmProjectName",
             "fullFile": "/home/travis/build/borenXue/webpack-alioss-plugin/test/index.js",
             "file": "/test/index.js",
@@ -171,14 +171,14 @@
                 "code": "clearEnv();\nprocess.env.WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_ID = '001';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_SECRET = '002';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_BUCKET = '003';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_REGION = '004';\nvar plugin = new WebpackAliOSSPlugin({});\nassert(_.isEqual(plugin.npmProjectName(), 'webpack-alioss-plugin'));",
                 "err": {},
                 "isRoot": false,
-                "uuid": "1d9540bb-a809-4a44-b380-3dfc85e66380",
+                "uuid": "9b3a7578-5e8f-4d30-99eb-b16bc7a508a5",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
             "passes": [
-              "1d9540bb-a809-4a44-b380-3dfc85e66380"
+              "9b3a7578-5e8f-4d30-99eb-b16bc7a508a5"
             ],
             "failures": [],
             "pending": [],
@@ -189,7 +189,7 @@
             "_timeout": 2000
           },
           {
-            "uuid": "09936916-5817-48ca-b759-701ed8198c62",
+            "uuid": "4c773302-9dde-4481-b510-3abde4c27157",
             "title": "#calc-config",
             "fullFile": "/home/travis/build/borenXue/webpack-alioss-plugin/test/index.js",
             "file": "/test/index.js",
@@ -209,14 +209,14 @@
                 "code": "clearEnv();\nprocess.env.WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_ID = '001';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_SECRET = '002';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_BUCKET = '003';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_REGION = '004';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_OSS_BASE_DIR = 'default_dir';\nvar plugin = new WebpackAliOSSPlugin();\nassert(_.isEqual(plugin.config, {\n  auth: {\n    accessKeyId: '001',\n    accessKeySecret: '002',\n    bucket: '003',\n    region: '004'\n  },\n  retry: 3,\n  existCheck: true,\n  ossBaseDir: 'default_dir',\n  project: 'webpack-alioss-plugin',\n  prefix: '',\n  exclude: /.*\\.html$/,\n  enableLog: false,\n  ignoreError: false,\n  removeMode: true,\n  gzip: true,\n  envPrefix: '',\n  options: undefined\n}), message);\nassert(_.isEqual(plugin.finalPrefix, 'default_dir/webpack-alioss-plugin'), '-');",
                 "err": {},
                 "isRoot": false,
-                "uuid": "08bd898c-53e8-4c32-93b0-d7be5c6feea9",
+                "uuid": "4d402c0c-3bca-42c4-9195-c77267fe7519",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
             "passes": [
-              "08bd898c-53e8-4c32-93b0-d7be5c6feea9"
+              "4d402c0c-3bca-42c4-9195-c77267fe7519"
             ],
             "failures": [],
             "pending": [],
@@ -227,7 +227,7 @@
             "_timeout": 2000
           },
           {
-            "uuid": "a1cd2cfe-6fe2-404d-b692-27e7dddbf206",
+            "uuid": "7db6be49-c9e8-4543-86cc-5a1495ce44f2",
             "title": "#finalPrefix 计算",
             "fullFile": "/home/travis/build/borenXue/webpack-alioss-plugin/test/index.js",
             "file": "/test/index.js",
@@ -247,14 +247,14 @@
                 "code": "clearEnv();\nprocess.env.WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_ID = '001';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_SECRET = '002';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_BUCKET = '003';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_REGION = '004';\nprocess.env.WEBPACK_ALIOSS_PLUGIN_OSS_BASE_DIR = 'default_dir';\nvar plugin = new WebpackAliOSSPlugin();\nassert(_.isEqual(plugin.finalPrefix, 'default_dir/webpack-alioss-plugin'));",
                 "err": {},
                 "isRoot": false,
-                "uuid": "af641dca-b807-49ed-82b8-09f4630ce33b",
+                "uuid": "551f64ce-72b3-4f81-a78f-101eb08827cf",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
             "passes": [
-              "af641dca-b807-49ed-82b8-09f4630ce33b"
+              "551f64ce-72b3-4f81-a78f-101eb08827cf"
             ],
             "failures": [],
             "pending": [],

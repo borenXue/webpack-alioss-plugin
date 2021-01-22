@@ -1,6 +1,6 @@
 # [webpack-alioss-plugin](https://git.io/fhMkf)
 
-<!-- [![Travis CI](https://img.shields.io/travis/borenXue/webpack-alioss-plugin/master.svg)](https://travis-ci.org/borenXue/webpack-alioss-plugin) -->
+[![Travis CI](https://img.shields.io/travis/com/borenXue/webpack-alioss-plugin/master.svg)](https://travis-ci.com/borenXue/webpack-alioss-plugin)
 [![node version](https://img.shields.io/node/v/webpack-alioss-plugin.svg)](https://nodejs.org)
 <span style="position:relative;top: -4px;margin-left: 8px;">
   <a target="_blank" href="https://git.io/fhMTi">更新记录</a>
@@ -9,6 +9,8 @@
 </span>
 
 阿里云 OSS 上传插件, 可在 webpack 打包结束后将来 webpack 生成的文件自动上传到 OSS 中。
+
+**支持 webpack 3、4、5**
 
 > **特色**
 
