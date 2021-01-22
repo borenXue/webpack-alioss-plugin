@@ -1,6 +1,6 @@
 # [webpack-alioss-plugin](https://git.io/fhMkf)
 
-[![Travis CI](https://img.shields.io/travis/borenXue/webpack-alioss-plugin/master.svg)](https://travis-ci.org/borenXue/webpack-alioss-plugin)
+<!-- [![Travis CI](https://img.shields.io/travis/borenXue/webpack-alioss-plugin/master.svg)](https://travis-ci.org/borenXue/webpack-alioss-plugin) -->
 [![node version](https://img.shields.io/node/v/webpack-alioss-plugin.svg)](https://nodejs.org)
 <span style="position:relative;top: -4px;margin-left: 8px;">
   <a target="_blank" href="https://git.io/fhMTi">更新记录</a>
@@ -116,6 +116,7 @@ removeMode | `WEBPACK_ALIOSS_PLUGIN_REMOVE_MODE` | true | 生成的文件自动�
 ossBaseDir | `WEBPACK_ALIOSS_PLUGIN_OSS_BASE_DIR` | `auto_upload_ci` | OSS 中存放上传文件的一级目录名 |
 project | - | 默认会自动读取 `package.json` 中的 `name` | OSS 中存放上传文件的二级目录, 一般为项目名 |
 options | - | undefined | 对象类型. [可用于设置文件的请求头、超时时间等](https://github.com/ali-sdk/ali-oss#putname-file-options) |
+envPrefix | - | `''` | 字符串类型. 环境变量key的前缀(针对所有相关的环境变量) |
 
 * ~~prefix~~: ~~出于安全考虑推荐不使用根目录, 只给该 `accessKey` 赋予某个子文件夹的权限~~
 * ignoreError: 如果上传过程中出现错误是否继续 webpack 构建
