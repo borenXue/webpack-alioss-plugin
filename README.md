@@ -1,6 +1,6 @@
 # [webpack-alioss-plugin](https://git.io/fhMkf)
 
-[![Travis CI](https://img.shields.io/travis/borenXue/webpack-alioss-plugin/master.svg)](https://travis-ci.org/borenXue/webpack-alioss-plugin)
+<!-- [![Travis CI](https://img.shields.io/travis/borenXue/webpack-alioss-plugin/master.svg)](https://travis-ci.org/borenXue/webpack-alioss-plugin) -->
 [![node version](https://img.shields.io/node/v/webpack-alioss-plugin.svg)](https://nodejs.org)
 <span style="position:relative;top: -4px;margin-left: 8px;">
   <a target="_blank" href="https://git.io/fhMTi">更新记录</a>
